@@ -3,7 +3,8 @@
 Что нужно делать:<br>
 1. <%= link_to "Скачать XLS с товарами (для заполнения)", exmaple_admin_import_path(format: "xls") %><br>
 2. Заполнить файл<br>
-3. Отправить файл с помощью этой формы:<br>
+3. "Сохранить как Microsoft Excel xls"<br>
+4. Отправить файл с помощью этой формы:<br>
 
 <%= form_tag(admin_import_path, multipart: true) do %>
     <%= file_field_tag 'price_xls' %><br>
