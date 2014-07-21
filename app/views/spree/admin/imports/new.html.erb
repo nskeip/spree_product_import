@@ -1,0 +1,11 @@
+<%= render 'spree/admin/shared/configuration_menu' %>
+
+Что нужно делать:<br>
+1. <%= link_to "Скачать XLS с товарами (для заполнения)", exmaple_admin_import_path(format: "xls") %><br>
+2. Заполнить файл<br>
+3. Отправить файл с помощью этой формы:<br>
+
+<%= form_tag(admin_import_path, multipart: true) do %>
+    <%= file_field_tag 'price_xls' %><br>
+    <%= submit_tag "Загрузить цены" %>
+<% end %>
