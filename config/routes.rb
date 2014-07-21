@@ -1,3 +1,8 @@
 Spree::Core::Engine.routes.draw do
-  # Add your extension routes here
+  namespace :admin do
+    resource :import, only: [:new, :update] do
+        get :exmaple, to: 'import#example'
+    end
+    get :import, to: 'import#new'
+  end
 end
