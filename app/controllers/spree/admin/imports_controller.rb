@@ -13,7 +13,7 @@ class Spree::Admin::ImportsController < Spree::Admin::ResourceController
         xls = Roo::Excel.new(params[:price_xls].path, nil, :ignore)
 
         (2..xls.last_row).each do |i|
-            type_of_record, db_id, _, _, price = xls.row(i)
+            type_of_record, db_id, _, _, new_price = xls.row(i)
 
             object_to_update = if type_of_record == "VARIANT"
                 Spree::Variant.find db_id
@@ -21,8 +21,10 @@ class Spree::Admin::ImportsController < Spree::Admin::ResourceController
                 Spree::Product.find db_id
             end
 
-            object_to_update.price = price.to_i
-            object_to_update.save!
+            if object_to_update.price.to_i != new_price.to_i
+                object_to_update.price = new_price.to_i
+                object_to_update.save!
+            end
         end
 
         flash[:notice] = "Цены обновлены"
